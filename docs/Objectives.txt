@@ -1,0 +1,10 @@
+1.) In this codebase, I want to scale the process of generating 1000 addresses to folks and ensure locking liquidity for people so that the tokens can sit there for people.
+
+2.) I also need to find a way to add those tokens to the liquidity pool on Orca on Solana, on Uniswap on Base and Eth, and Curve on Arb.
+
+3.) I want to also create a faucet.  
+    - https://www.youtube.com/watch?v=crFECBmQdkc&list=PLeygOQXgp5DtFCnhsBTEJV74OVIP3N6Af&index=1
+
+4.) It also needs a cap by wallet and a daily cap. 
+
+5.) Create a dashboard where I can adjust it too.
