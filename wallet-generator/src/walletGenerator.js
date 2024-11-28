@@ -1,8 +1,9 @@
 const { Keypair } = require('@solana/web3.js');
 const ethers = require('ethers');
+const XLSX = require('xlsx');
 
 // Function to generate multiple Solana and Ethereum wallets
-const createMultipleWallets = (numWallets) => {
+const createMultipleWallets = (numWallets = 1000) => {
     const wallets = [];
 
     for (let i = 0; i < numWallets; i++) {
@@ -31,9 +32,28 @@ const createMultipleWallets = (numWallets) => {
     return wallets;
 };
 
-// Example: Generate 5 paired Solana and Ethereum wallets
-const wallets = createMultipleWallets(500);
+// Function to export wallets to an Excel file.
+const exportToExcel = (wallets) => {
+    const worksheet = XLSX.utils.json_to_sheet(wallets.map(wallet => ({
+        'Solana Address': wallet.solana.address,
+        'Solana Secret Key': wallet.solana.secretKey,
+        'Ethereum Address': wallet.ethereum.address,
+        'Ethereum Private Key': wallet.ethereum.privateKey,
+    })));
 
-// Log the wallets
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Wallets');
+
+    // Write to an Excel file.
+    XLSX.writeFile(workbook, 'docs/wallets/wallets.xlsx');
+};
+
+// 1000 paired Solana and Ethereum wallets.
+const wallets = createMultipleWallets();
+
+// Export the wallets to an Excel file.
+exportToExcel(wallets);
+
+// Log the wallets.
 console.log(JSON.stringify(wallets, null, 2));
 
